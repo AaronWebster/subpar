@@ -1,6 +1,6 @@
 # Utility for creating self-contained python executables.
 
-load("@rules_python//python:defs.bzl", "py_library", "py_binary", "py_test")
+load("@rules_python//python:defs.bzl", "py_binary", "py_library", "py_test")
 load("//:subpar.bzl", "parfile")
 
 package(default_visibility = ["//visibility:public"])
@@ -19,21 +19,21 @@ py_library(
     data = [
         "//runtime:support",
     ],
-    srcs_version = "PY2AND3",
+    srcs_version = "PY3AND3",
 )
 
 py_library(
     name = "test_utils",
     srcs = ["test_utils.py"],
-    srcs_version = "PY2AND3",
+    srcs_version = "PY3AND3",
 )
 
 py_binary(
     name = "compiler",
     srcs = ["compiler.py"],
-    python_version = "PY2",
     main = "compiler.py",
-    srcs_version = "PY2AND3",
+    python_version = "PY3",
+    srcs_version = "PY3AND3",
     deps = [":compiler_lib"],
 )
 
@@ -42,7 +42,7 @@ parfile(
     name = "compiler.par",
     src = ":compiler",
     compiler = ":compiler",
-    default_python_version = "PY2",
+    default_python_version = "PY3",
     main = "compiler.py",
 )
 
@@ -51,7 +51,7 @@ parfile(
     size = "small",
     srcs = [src_name + "_test.py"],
     main = src_name + "_test.py",
-    srcs_version = "PY2AND3",
+    srcs_version = "PY3AND3",
     deps = [
         ":compiler_lib",
         ":test_utils",

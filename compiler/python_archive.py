@@ -215,7 +215,7 @@ class PythonArchive(object):
 
         # Extend the list of import roots to include workspace roots
         top_roots = set()
-        for stored_path in manifest.keys():
+        for stored_path in list(manifest.keys()):
             if '/' in stored_path:  # Zip file paths use / on all platforms
                 top_dir = stored_path.split('/', 1)[0]
                 if top_dir not in top_roots:
@@ -230,7 +230,7 @@ class PythonArchive(object):
             stored_resources[stored_filename] = resource
 
         # Scan manifest
-        for stored_path, local_path in manifest.items():
+        for stored_path, local_path in list(manifest.items()):
             if local_path is None:
                 stored_resources[stored_path] = stored_resource.EmptyFile(
                     stored_path, self.timestamp_tuple)

@@ -135,7 +135,7 @@ def _version_check_pkg_resources(pkg_resources):
     # third default argument ('replace').
     try:
         if sys.version_info[0] < 3:
-            defaults = pkg_resources.WorkingSet.add.im_func.func_defaults
+            defaults = pkg_resources.WorkingSet.add.__func__.__defaults__
         else:
             defaults = pkg_resources.WorkingSet.add.__defaults__
         return len(defaults) >= 3
